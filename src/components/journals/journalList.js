@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { JournalEntry } from "./journalEntry";
 
 const rawJournalData = [
   { title: "Post One", content: "Post content", status: "draft" },
@@ -13,15 +14,27 @@ export default class JournalList extends Component {
 
     this.state = {
       journalData: rawJournalData,
-      greeting: 'Hi THere',
       isOpen: true
     };
   }
 
-  render(){
+
+  render() {
+    const journalEntries = this.state.journalData.map(journalEntry => {
+      return (
+        <div key={journalEntry.title}>
+          <JournalEntry
+            title={journalEntry.title}
+            content={journalEntry.content}
+          />
+        </div>
+      );
+    });
+
     return (
       <div>
-        {this.props.heading}
+        <h1>{this.props.heading}</h1>
+        {journalEntries}
       </div>
     );
   }
